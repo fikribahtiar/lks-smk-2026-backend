@@ -9,6 +9,23 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'id_card_number' => 'required|unique:societies',
+            'password' => 'required|min:6',
+            'born_date' => 'required',
+            'gender' => 'required',
+            'address' => 'required',
+            'regional_id' => 'required'
+        ]);
+
+        return response()->json([
+            'message' => 'Register success',
+            'data' => $society
+        ], 200);
+    }
     public function login(Request $request)
     {
         $request->validate([

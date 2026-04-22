@@ -37,5 +37,10 @@ class Society extends Authenticatable
     {
         return $this->hasMany(\App\Models\Application::class);
     }
+
+    public function validation()
+    {
+        return $this->hasOne(\App\Models\Validation::class);
+    }
 }
 
