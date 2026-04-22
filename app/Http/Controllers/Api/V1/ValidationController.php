@@ -19,11 +19,23 @@ class ValidationController extends Controller
 
         $society = $request->user();
 
-        // ❗ hanya boleh 1 kali request
-        if ($society->validation) {
-            return response()->json([
-                'message' => 'Validation request already exists'
-            ], 400);
+        $validation = $society->validations;
+
+        if ($validation) {
+            $validation->update([
+                'job' => $request->job,
+                'job_description' => $request->job_description,
+                'income' => $request->income,
+                'reason_accepted' => $request->reason_accepted,
+            ]);
+        } else {
+            Validation::create([
+                'society_id' => $society->id,
+                'job' => $request->job,
+                'job_description' => $request->job_description,
+                'income' => $request->income,
+                'reason_accepted' => $request->reason_accepted,
+            ]);
         }
 
         Validation::create([

@@ -28,7 +28,7 @@ class Society extends Authenticatable
         return $this->belongsTo(Regional::class);
     }
 
-    public function validation()
+    public function validations()
     {
         return $this->hasOne(Validation::class);
     }
