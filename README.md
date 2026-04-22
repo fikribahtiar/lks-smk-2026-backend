@@ -1,66 +1,169 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
+<!-- HEADER -->
+<h1 align="center">🚀 LKS Backend API</h1>
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  Backend API untuk LKS menggunakan <b>Laravel 11</b> + <b>Sanctum</b>
 </p>
 
-## About Laravel
+<p align="center">
+  <img src="https://img.shields.io/badge/Laravel-11-red">
+  <img src="https://img.shields.io/badge/PHP-8.3-blue">
+  <img src="https://img.shields.io/badge/API-REST-green">
+</p>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<hr>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<h2>🛠️ Tech Stack</h2>
+<ul>
+  <li>Laravel 11</li>
+  <li>PHP 8.3+</li>
+  <li>MySQL</li>
+  <li>Laravel Sanctum</li>
+</ul>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<hr>
 
-## Learning Laravel
+<h2>⚙️ Installation</h2>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<pre>
+git clone https://github.com/username/lks-backend.git
+cd lks-backend
+composer install
+cp .env.example .env
+php artisan key:generate
+</pre>
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+<h3>📌 Setup Database (.env)</h3>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+<pre>
+DB_DATABASE=lks_backend
+DB_USERNAME=root
+DB_PASSWORD=
+</pre>
 
-## Laravel Sponsors
+<h3>📌 Migration & Seeder</h3>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+<pre>
+php artisan migrate:fresh --seed
+</pre>
 
-### Premium Partners
+<h3>📌 Run Server</h3>
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+<pre>
+php artisan serve
+</pre>
 
-## Contributing
+<hr>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<h2>🔐 A1 - Authentication</h2>
 
-## Code of Conduct
+<h3>Login</h3>
+<pre>
+POST /api/v1/auth/login
+</pre>
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+<b>Body:</b>
+<pre>
+{
+  "id_card_number": "1234567890",
+  "password": "password"
+}
+</pre>
 
-## Security Vulnerabilities
+<b>Response:</b>
+<pre>
+{
+  "name": "Doni Rianto",
+  "token": "1|xxxx",
+  "regional": {
+    "province": "DKI Jakarta"
+  }
+}
+</pre>
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+<h3>Logout</h3>
+<pre>
+POST /api/v1/auth/logout
+Authorization: Bearer TOKEN
+</pre>
 
-## License
+<hr>
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<h2>🧾 A2 - Validation</h2>
+
+<h3>Request Validation</h3>
+<pre>
+POST /api/v1/validation
+</pre>
+
+<pre>
+{
+  "job": "Programmer",
+  "job_description": "Backend Developer",
+  "income": 10000000,
+  "reason_accepted": "Stable income"
+}
+</pre>
+
+<h3>Get Validation</h3>
+<pre>
+GET /api/v1/validation
+</pre>
+
+<hr>
+
+<h2>🚗 A3 - Instalment Cars</h2>
+
+<h3>Get Cars</h3>
+<pre>
+GET /api/v1/instalment_cars
+</pre>
+
+<h3>Detail Car</h3>
+<pre>
+GET /api/v1/instalment_cars/{id}
+</pre>
+
+<hr>
+
+<h2>📝 A4 - Applications</h2>
+
+<h3>Apply</h3>
+<pre>
+POST /api/v1/applications
+</pre>
+
+<pre>
+{
+  "instalment_id": 1,
+  "months": 12,
+  "notes": "I want this car"
+}
+</pre>
+
+<h3>Get Applications</h3>
+<pre>
+GET /api/v1/applications
+</pre>
+
+<hr>
+
+<h2>🧪 Dummy Account</h2>
+
+<pre>
+ID Card Number : 1234567890
+Password       : password
+</pre>
+
+<hr>
+
+<h2>⚠️ Notes</h2>
+<ul>
+  <li>Gunakan <code>migrate:fresh --seed</code> untuk reset database</li>
+  <li>Validation harus <b>accepted</b> sebelum apply instalment</li>
+  <li>Apply hanya bisa <b>1 kali</b></li>
+</ul>
+
+<hr>
+
+<h2>👨‍💻 Author</h2>
+<p>Fikri Bahtiar</p>
