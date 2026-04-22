@@ -21,6 +21,16 @@ class AuthController extends Controller
             'regional_id' => 'required'
         ]);
 
+        $society = Society::create([
+            'name' => $request->name,
+            'id_card_number' => $request->id_card_number,
+            'password' => Hash::make($request->password),
+            'born_date' => $request->born_date,
+            'gender' => $request->gender,
+            'address' => $request->address,
+            'regional_id' => $request->regional_id
+        ]);
+
         return response()->json([
             'message' => 'Register success',
             'data' => $society
